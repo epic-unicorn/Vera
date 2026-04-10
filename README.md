@@ -1,6 +1,6 @@
 # Vera: Zero-Knowledge Oncology Navigator
 
-**Jouw persoonlijke oncologie kompas.** Clear, private, trusted medical guidance at your fingertips.
+**Your personal oncology compass.** Clear, private, trusted medical guidance at your fingertips.
 
 ## Features
 
