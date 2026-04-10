@@ -8,7 +8,8 @@ import 'identity_shield_service.dart';
 
 // ── Provider ──────────────────────────────────────────────────────────────────
 
-final localTranslationServiceProvider = Provider<LocalTranslationService>((ref) {
+final localTranslationServiceProvider =
+    Provider<LocalTranslationService>((ref) {
   return LocalTranslationService(
     shieldService: ref.watch(identityShieldServiceProvider),
   );
@@ -218,8 +219,7 @@ class LocalTranslationService {
 
   // ── Internal ──────────────────────────────────────────────────────────────
 
-  OnDeviceTranslator _getOrCreateTranslator(
-      String source, String target) {
+  OnDeviceTranslator _getOrCreateTranslator(String source, String target) {
     final key = '$source→$target';
     return _translators.putIfAbsent(
       key,

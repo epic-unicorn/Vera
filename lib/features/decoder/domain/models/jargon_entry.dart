@@ -40,8 +40,7 @@ const List<JargonEntry> builtInGlossary = [
   ),
   JargonEntry(
     term: 'ER-negatief',
-    dutchExplanation:
-        'Uw tumor heeft geen oestrogeenreceptoren. '
+    dutchExplanation: 'Uw tumor heeft geen oestrogeenreceptoren. '
         'Dit betekent dat hormoontherapie (zoals tamoxifen) voor ú niet effectief is.',
     actionItem:
         'Bevestig met uw arts dat hormonale behandeling niet geïndiceerd is voor uw tumor.',
@@ -54,8 +53,7 @@ const List<JargonEntry> builtInGlossary = [
         'Ki-67 is een maat voor hoe snel de tumorcellen zich delen. '
         'Een hoge Ki-67 (≥25%) betekent een sneller groeiende tumor die vaak '
         'goed reageert op chemotherapie.',
-    actionItem:
-        'Vraag wat uw Ki-67-percentage betekent voor uw behandelkeuze.',
+    actionItem: 'Vraag wat uw Ki-67-percentage betekent voor uw behandelkeuze.',
     category: 'pathologie',
     fhirCode: 'LOINC:85326-7',
   ),
@@ -71,8 +69,7 @@ const List<JargonEntry> builtInGlossary = [
   ),
   JargonEntry(
     term: 'Stadium IIA',
-    dutchExplanation:
-        'Stadium IIA (cT2N0M0) betekent: tumor tussen 2 en 5 cm, '
+    dutchExplanation: 'Stadium IIA (cT2N0M0) betekent: tumor tussen 2 en 5 cm, '
         'geen bewijs van uitzaaiing naar lymfeklieren of andere organen.',
     actionItem:
         'Vraag hoe het stadium uw behandelopties beïnvloedt en wat de te verwachten '
@@ -113,8 +110,7 @@ const List<JargonEntry> builtInGlossary = [
   ),
   JargonEntry(
     term: 'LVEF (linker ventrikel ejectiefractie)',
-    dutchExplanation:
-        'De LVEF meet hoe goed uw hart bloed rondpompt. '
+    dutchExplanation: 'De LVEF meet hoe goed uw hart bloed rondpompt. '
         'Trastuzumab kan de hartfunctie beïnvloeden; '
         'uw LVEF wordt daarom elke 3 maanden gemeten via echografie.',
     actionItem:

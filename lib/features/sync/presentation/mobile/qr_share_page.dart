@@ -153,8 +153,7 @@ class _QrSharePageState extends ConsumerState<QrSharePage> {
         children: [
           const CircularProgressIndicator.adaptive(),
           const SizedBox(height: 16),
-          Text(StringsNl.syncConnecting,
-              style: theme.textTheme.bodyMedium),
+          Text(StringsNl.syncConnecting, style: theme.textTheme.bodyMedium),
         ],
       );
     }
@@ -163,14 +162,12 @@ class _QrSharePageState extends ConsumerState<QrSharePage> {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.error_outline,
-              size: 48, color: theme.colorScheme.error),
+          Icon(Icons.error_outline, size: 48, color: theme.colorScheme.error),
           const SizedBox(height: 12),
           Text(_error!, textAlign: TextAlign.center),
           const SizedBox(height: 16),
           ElevatedButton(
-              onPressed: _createSession,
-              child: const Text(StringsNl.retry)),
+              onPressed: _createSession, child: const Text(StringsNl.retry)),
         ],
       );
     }
@@ -187,9 +184,8 @@ class _QrSharePageState extends ConsumerState<QrSharePage> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: isConnected
-                ? const Color(0xFFE8F5EE)
-                : const Color(0xFFFFF3E0),
+            color:
+                isConnected ? const Color(0xFFE8F5EE) : const Color(0xFFFFF3E0),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: isConnected

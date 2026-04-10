@@ -71,38 +71,35 @@ class PrivacySentinel extends ConsumerWidget {
   static _SentinelConfig _configFor(PrivacyStatus status) {
     return switch (status) {
       PrivacyStatus.local => _SentinelConfig(
-          dotColor: const Color(0xFF1B7A3E),        // WCAG AA ≥ 4.5:1 on white
+          dotColor: const Color(0xFF1B7A3E), // WCAG AA ≥ 4.5:1 on white
           backgroundColor: const Color(0xFFE8F5EE),
           borderColor: const Color(0xFF1B7A3E),
           icon: Icons.shield_outlined,
           title: StringsNl.sentinelLocalTitle,
           subtitle: StringsNl.sentinelLocalSubtitle,
-          semanticLabel:
-              'Privacy Sentinel: ${StringsNl.sentinelLocalTitle}. '
+          semanticLabel: 'Privacy Sentinel: ${StringsNl.sentinelLocalTitle}. '
               '${StringsNl.sentinelLocalSubtitle}',
           shouldPulse: false,
         ),
       PrivacyStatus.p2pSessionActive => _SentinelConfig(
-          dotColor: const Color(0xFFE07B00),        // amber – 4.6:1 on white
+          dotColor: const Color(0xFFE07B00), // amber – 4.6:1 on white
           backgroundColor: const Color(0xFFFFF3E0),
           borderColor: const Color(0xFFE07B00),
           icon: Icons.sensors,
           title: StringsNl.sentinelWarningTitle,
           subtitle: StringsNl.sentinelWarningSubtitle,
-          semanticLabel:
-              'Privacy Sentinel: ${StringsNl.sentinelWarningTitle}. '
+          semanticLabel: 'Privacy Sentinel: ${StringsNl.sentinelWarningTitle}. '
               '${StringsNl.sentinelWarningSubtitle}',
           shouldPulse: true,
         ),
       PrivacyStatus.unknown => _SentinelConfig(
-          dotColor: const Color(0xFFC62828),        // red – 5.8:1 on white
+          dotColor: const Color(0xFFC62828), // red – 5.8:1 on white
           backgroundColor: const Color(0xFFFFEBEE),
           borderColor: const Color(0xFFC62828),
           icon: Icons.warning_amber_outlined,
           title: StringsNl.sentinelErrorTitle,
           subtitle: StringsNl.sentinelErrorSubtitle,
-          semanticLabel:
-              'Privacy Sentinel: ${StringsNl.sentinelErrorTitle}. '
+          semanticLabel: 'Privacy Sentinel: ${StringsNl.sentinelErrorTitle}. '
               '${StringsNl.sentinelErrorSubtitle}',
           shouldPulse: true,
         ),

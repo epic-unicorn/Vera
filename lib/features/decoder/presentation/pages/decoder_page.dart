@@ -29,7 +29,8 @@ class _DecoderState {
     Map<String, String>? translatedEntries,
     bool? isTranslating,
     Map<String, double>? downloadProgress,
-  }) => _DecoderState(
+  }) =>
+      _DecoderState(
         query: query ?? this.query,
         selectedLanguage: selectedLanguage ?? this.selectedLanguage,
         translatedEntries: translatedEntries ?? this.translatedEntries,
@@ -73,7 +74,8 @@ class _DecoderNotifier extends StateNotifier<_DecoderState> {
         text: '${entry.dutchExplanation}\n\n${entry.actionItem}',
         targetLanguage: langCode,
       );
-      translated[entry.term] = result.text ?? '${entry.dutchExplanation}\n\n${entry.actionItem}';
+      translated[entry.term] =
+          result.text ?? '${entry.dutchExplanation}\n\n${entry.actionItem}';
     }
 
     state = state.copyWith(
@@ -107,9 +109,12 @@ class DecoderPage extends ConsumerWidget {
     final theme = Theme.of(context);
 
     final filtered = builtInGlossary
-        .where((e) => state.query.isEmpty ||
+        .where((e) =>
+            state.query.isEmpty ||
             e.term.toLowerCase().contains(state.query.toLowerCase()) ||
-            e.dutchExplanation.toLowerCase().contains(state.query.toLowerCase()))
+            e.dutchExplanation
+                .toLowerCase()
+                .contains(state.query.toLowerCase()))
         .toList();
 
     return Scaffold(
@@ -127,8 +132,7 @@ class DecoderPage extends ConsumerWidget {
                   const SizedBox(height: 6),
                   Text(StringsNl.decoderSubtitle,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color:
-                            theme.colorScheme.onSurface.withOpacity(0.65),
+                        color: theme.colorScheme.onSurface.withOpacity(0.65),
                       )),
                   const SizedBox(height: 16),
 
@@ -176,11 +180,11 @@ class DecoderPage extends ConsumerWidget {
                 child: Row(
                   children: [
                     const SizedBox(
-                        width: 20, height: 20,
+                        width: 20,
+                        height: 20,
                         child: CircularProgressIndicator(strokeWidth: 2)),
                     const SizedBox(width: 12),
-                    Text('Lokaal vertalen…',
-                        style: theme.textTheme.bodyMedium),
+                    Text('Lokaal vertalen…', style: theme.textTheme.bodyMedium),
                   ],
                 ),
               ),
@@ -290,8 +294,7 @@ class _PrivacyNote extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.shield_outlined,
-              size: 18, color: Color(0xFF1B7A3E)),
+          const Icon(Icons.shield_outlined, size: 18, color: Color(0xFF1B7A3E)),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -334,10 +337,8 @@ class _JargonCardState extends State<_JargonCard> {
 
     // Split translated content back (explanation + action item)
     final parts = widget.translatedContent?.split('\n\n') ?? [];
-    final explanation =
-        parts.isNotEmpty ? parts.first : entry.dutchExplanation;
-    final actionItem =
-        parts.length > 1 ? parts.last : entry.actionItem;
+    final explanation = parts.isNotEmpty ? parts.first : entry.dutchExplanation;
+    final actionItem = parts.length > 1 ? parts.last : entry.actionItem;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -353,8 +354,7 @@ class _JargonCardState extends State<_JargonCard> {
               Row(
                 children: [
                   Expanded(
-                    child: Text(entry.term,
-                        style: theme.textTheme.titleMedium),
+                    child: Text(entry.term, style: theme.textTheme.titleMedium),
                   ),
                   if (entry.category.isNotEmpty)
                     Chip(label: Text(entry.category)),
@@ -392,17 +392,15 @@ class _JargonCardState extends State<_JargonCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Icon(Icons.task_alt,
-                              size: 20,
-                              color: theme.colorScheme.primary),
+                              size: 20, color: theme.colorScheme.primary),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Actiepunt',
-                                    style: theme.textTheme.labelSmall
-                                        ?.copyWith(
-                                            color: theme.colorScheme.primary)),
+                                    style: theme.textTheme.labelSmall?.copyWith(
+                                        color: theme.colorScheme.primary)),
                                 const SizedBox(height: 4),
                                 Text(actionItem,
                                     style: theme.textTheme.bodySmall),

@@ -96,7 +96,8 @@ class IdentityShieldService {
       if (entry.value is String) {
         result[entry.key] = await shield(entry.value as String);
       } else if (entry.value is Map<String, dynamic>) {
-        result[entry.key] = await shieldMap(entry.value as Map<String, dynamic>);
+        result[entry.key] =
+            await shieldMap(entry.value as Map<String, dynamic>);
       } else if (entry.value is List) {
         result[entry.key] = await _shieldList(entry.value as List);
       } else {
@@ -124,8 +125,7 @@ class IdentityShieldService {
 
   Future<String> _redactWithMlKit(String text) async {
     try {
-      final annotations =
-          await _extractor!.annotateText(text);
+      final annotations = await _extractor!.annotateText(text);
 
       // Collect spans to redact, process in reverse to preserve offsets
       final spans = <({int start, int end})>[];

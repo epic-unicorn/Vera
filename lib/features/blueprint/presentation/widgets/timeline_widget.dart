@@ -51,8 +51,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                   isLast: isLast,
                   isExpanded: _expandedId == event.id,
                   onTap: () => setState(() {
-                    _expandedId =
-                        _expandedId == event.id ? null : event.id;
+                    _expandedId = _expandedId == event.id ? null : event.id;
                   }),
                 );
               },
@@ -116,9 +115,7 @@ class _TimelineNode extends StatelessWidget {
               height: 100,
               margin: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
-                color: isExpanded
-                    ? _phaseColor
-                    : _phaseColor.withOpacity(0.12),
+                color: isExpanded ? _phaseColor : _phaseColor.withOpacity(0.12),
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
                   color: _phaseColor,
@@ -132,7 +129,8 @@ class _TimelineNode extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        width: 10, height: 10,
+                        width: 10,
+                        height: 10,
                         decoration: BoxDecoration(
                           color: _phaseColor,
                           shape: BoxShape.circle,
@@ -207,8 +205,8 @@ class _EventDetailPanel extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(event.title,
-                          style: theme.textTheme.titleMedium),
+                      child:
+                          Text(event.title, style: theme.textTheme.titleMedium),
                     ),
                     if (event.fhirStatus != null)
                       _StatusBadge(status: event.fhirStatus!),
@@ -234,7 +232,7 @@ class _EventDetailPanel extends StatelessWidget {
                     link: true,
                     label: 'IKNL richtlijn raadplegen',
                     child: TextButton.icon(
-                      onPressed: () { /* open URL in browser */ },
+                      onPressed: () {/* open URL in browser */},
                       icon: const Icon(Icons.open_in_new, size: 16),
                       label: const Text('IKNL Richtlijn raadplegen'),
                     ),
@@ -244,8 +242,7 @@ class _EventDetailPanel extends StatelessWidget {
                 // Action items
                 if (event.actionItems.isNotEmpty) ...[
                   const SizedBox(height: 12),
-                  Text('Actiepunten:',
-                      style: theme.textTheme.titleSmall),
+                  Text('Actiepunten:', style: theme.textTheme.titleSmall),
                   const SizedBox(height: 6),
                   ...event.actionItems.map(
                     (item) => Padding(
@@ -254,12 +251,10 @@ class _EventDetailPanel extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Icon(Icons.check_circle_outline,
-                              size: 18,
-                              color: theme.colorScheme.primary),
+                              size: 18, color: theme.colorScheme.primary),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(item,
-                                style: theme.textTheme.bodySmall),
+                            child: Text(item, style: theme.textTheme.bodySmall),
                           ),
                         ],
                       ),

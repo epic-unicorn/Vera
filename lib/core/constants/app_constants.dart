@@ -39,8 +39,7 @@ class AppConstants {
   /// Signalling WebSocket endpoint.
   /// In production this is a self-hosted, TLS-terminated relay that only
   /// forwards JSON SDP/ICE messages – never medical payload.
-  static const String signalingWsUrl =
-      'wss://signal.vera-app.nl/v1/session';
+  static const String signalingWsUrl = 'wss://signal.vera-app.nl/v1/session';
 
   /// QR code version / TTL (seconds). Session expires after this period.
   static const int qrSessionTtlSeconds = 300;
@@ -53,8 +52,7 @@ class AppConstants {
   // ── FHIR ──────────────────────────────────────────────────────────────────
 
   /// Dutch IKNL Richtlijnendatabase base URL (guidelines reference only).
-  static const String iknlGuidelinesBaseUrl =
-      'https://www.iknl.nl/richtlijnen';
+  static const String iknlGuidelinesBaseUrl = 'https://www.iknl.nl/richtlijnen';
 
   /// Richtlijnendatabase API (anonymised guide lookups only).
   static const String richtlijnendatabaseApiUrl =

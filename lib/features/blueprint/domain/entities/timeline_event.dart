@@ -36,7 +36,8 @@ class TimelineEvent {
   ) {
     return activities.map((activity) {
       final detail = activity['detail'] as Map<String, dynamic>? ?? {};
-      final code = (detail['code'] as Map<String, dynamic>?)?['text'] as String? ?? '';
+      final code =
+          (detail['code'] as Map<String, dynamic>?)?['text'] as String? ?? '';
       final status = detail['status'] as String? ?? 'unknown';
       final period = detail['scheduledPeriod'] as Map<String, dynamic>?;
       final startDate = period?['start'] as String? ?? '';

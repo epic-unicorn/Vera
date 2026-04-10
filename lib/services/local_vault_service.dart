@@ -25,7 +25,8 @@ final isarProvider = Provider<Isar>((_) => throw UnimplementedError(
     'isarProvider must be overridden in ProviderScope on mobile.'));
 
 final localVaultServiceProvider = Provider<LocalVaultService>((ref) {
-  final isar = PlatformDetector.isVaultSupported ? ref.watch(isarProvider) : null;
+  final isar =
+      PlatformDetector.isVaultSupported ? ref.watch(isarProvider) : null;
   return LocalVaultService(isar: isar);
 });
 
@@ -58,8 +59,8 @@ class LocalVaultService {
     // Android: encrypt using the Android Keystore at EncryptedSharedPreferences
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
     // iOS: store in the Keychain accessible only when device is unlocked
-    iOptions:
-        IOSOptions(accessibility: KeychainAccessibility.first_unlock_this_device),
+    iOptions: IOSOptions(
+        accessibility: KeychainAccessibility.first_unlock_this_device),
   );
   final _localAuth = LocalAuthentication();
   final _uuid = const Uuid();
@@ -193,7 +194,10 @@ class LocalVaultService {
     }
     final isar = _isar;
     if (isar == null) {
-      return (records: <MedicalRecord>[], failure: const VaultNotSupportedFailure());
+      return (
+        records: <MedicalRecord>[],
+        failure: const VaultNotSupportedFailure()
+      );
     }
 
     try {
@@ -201,7 +205,8 @@ class LocalVaultService {
           await isar.medicalRecordModels.where().sortByDateRecorded().findAll();
 
       final records = models.map((m) {
-        final decryptedPayload = _decryptString(m.encryptedPayload, _sessionKey!);
+        final decryptedPayload =
+            _decryptString(m.encryptedPayload, _sessionKey!);
         final decryptedTitle = _decryptString(m.encryptedTitle, _sessionKey!);
         return MedicalRecord(
           id: m.uuid,
@@ -230,10 +235,7 @@ class LocalVaultService {
     final isar = _isar;
     if (isar == null) return;
     await isar.writeTxn(() async {
-      await isar.medicalRecordModels
-          .filter()
-          .uuidEqualTo(uuid)
-          .deleteAll();
+      await isar.medicalRecordModels.filter().uuidEqualTo(uuid).deleteAll();
     });
   }
 
@@ -257,10 +259,13 @@ class LocalVaultService {
     );
     final encrypted = encrypter.encrypt(plainText, iv: iv);
     // Prepend nonce so it can be reconstructed during decryption
-    final combined = Uint8List(AppConstants.gcmNonceBytes + encrypted.bytes.length)
-      ..setRange(0, AppConstants.gcmNonceBytes, nonce)
-      ..setRange(AppConstants.gcmNonceBytes, AppConstants.gcmNonceBytes + encrypted.bytes.length,
-          encrypted.bytes);
+    final combined =
+        Uint8List(AppConstants.gcmNonceBytes + encrypted.bytes.length)
+          ..setRange(0, AppConstants.gcmNonceBytes, nonce)
+          ..setRange(
+              AppConstants.gcmNonceBytes,
+              AppConstants.gcmNonceBytes + encrypted.bytes.length,
+              encrypted.bytes);
     return base64Encode(combined);
   }
 

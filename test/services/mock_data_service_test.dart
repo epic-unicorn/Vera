@@ -12,7 +12,8 @@ void main() {
     // Helper: fetch bundle and unwrap (tests assume success path)
     Future<FhirBundle> getBundle() async {
       final result = await mockDataService.fetchOncologyBundle();
-      expect(result.bundle, isNotNull, reason: 'fetchOncologyBundle should succeed');
+      expect(result.bundle, isNotNull,
+          reason: 'fetchOncologyBundle should succeed');
       expect(result.failure, isNull);
       return result.bundle!;
     }
@@ -41,13 +42,15 @@ void main() {
         final bundle = await getBundle();
         final types = bundle.resources.map((r) => r.resourceType).toSet();
 
-        expect(types, containsAll([
-          'Patient',
-          'Condition',
-          'Observation',
-          'CarePlan',
-          'Appointment',
-        ]));
+        expect(
+            types,
+            containsAll([
+              'Patient',
+              'Condition',
+              'Observation',
+              'CarePlan',
+              'Appointment',
+            ]));
       });
     });
 
@@ -99,7 +102,8 @@ void main() {
       test('condition contains ICD-10 code C50.4', () async {
         final bundle = await getBundle();
         final condition = getCondition(bundle);
-        final coding = ((condition.data['code'] as Map)['coding'] as List)[0] as Map;
+        final coding =
+            ((condition.data['code'] as Map)['coding'] as List)[0] as Map;
         expect(coding['code'], equals('C50.4'));
         expect(coding['system'], contains('icd-10'));
       });
@@ -107,12 +111,18 @@ void main() {
       test('condition display is in Dutch', () async {
         final bundle = await getBundle();
         final condition = getCondition(bundle);
-        final display = ((condition.data['code'] as Map)['coding'] as List)[0]['display'] as String;
+        final display = ((condition.data['code'] as Map)['coding'] as List)[0]
+            ['display'] as String;
         expect(display, isNotEmpty);
         // Dutch oncology terminology — display is locale-dependent
-        expect(display.toLowerCase(),
-            anyOf(contains('invasief'), contains('ductaal'), contains('carcinoom'),
-                  contains('mamma'), contains('neoplasma')));
+        expect(
+            display.toLowerCase(),
+            anyOf(
+                contains('invasief'),
+                contains('ductaal'),
+                contains('carcinoom'),
+                contains('mamma'),
+                contains('neoplasma')));
       });
 
       test('condition has staging information', () async {
@@ -127,13 +137,16 @@ void main() {
     group('Biomarker Observations', () {
       test('bundle contains Observation resources', () async {
         final bundle = await getBundle();
-        final obs = bundle.resources.where((r) => r.resourceType == 'Observation').toList();
+        final obs = bundle.resources
+            .where((r) => r.resourceType == 'Observation')
+            .toList();
         expect(obs, isNotEmpty);
       });
 
       test('observations have LOINC codes', () async {
         final bundle = await getBundle();
-        final obs = bundle.resources.firstWhere((r) => r.resourceType == 'Observation');
+        final obs =
+            bundle.resources.firstWhere((r) => r.resourceType == 'Observation');
         final coding = ((obs.data['code'] as Map)['coding'] as List)[0] as Map;
         expect(coding['system'], contains('loinc'));
       });
@@ -142,7 +155,8 @@ void main() {
         final bundle = await getBundle();
         final ki67 = bundle.resources.firstWhere((r) {
           if (r.resourceType != 'Observation') return false;
-          final coding = (r.data['code']?['coding'] as List?)?.firstOrNull as Map?;
+          final coding =
+              (r.data['code']?['coding'] as List?)?.firstOrNull as Map?;
           return coding?['display']?.toString().contains('Ki-67') ?? false;
         });
         final value = ki67.data['valueQuantity'] as Map?;
@@ -156,13 +170,16 @@ void main() {
     group('Procedures', () {
       test('bundle contains at least 3 procedures', () async {
         final bundle = await getBundle();
-        final procs = bundle.resources.where((r) => r.resourceType == 'Procedure').toList();
+        final procs = bundle.resources
+            .where((r) => r.resourceType == 'Procedure')
+            .toList();
         expect(procs.length, greaterThanOrEqualTo(3));
       });
 
       test('all procedures have a non-empty status', () async {
         final bundle = await getBundle();
-        for (final proc in bundle.resources.where((r) => r.resourceType == 'Procedure')) {
+        for (final proc
+            in bundle.resources.where((r) => r.resourceType == 'Procedure')) {
           expect(proc.data['status'], isNotEmpty);
         }
       });
@@ -173,19 +190,23 @@ void main() {
     group('Medications', () {
       test('bundle contains at least 3 medication requests', () async {
         final bundle = await getBundle();
-        final meds = bundle.resources.where((r) => r.resourceType == 'MedicationRequest').toList();
+        final meds = bundle.resources
+            .where((r) => r.resourceType == 'MedicationRequest')
+            .toList();
         expect(meds.length, greaterThanOrEqualTo(3));
       });
 
       test('medication requests have intent=order', () async {
         final bundle = await getBundle();
-        final med = bundle.resources.firstWhere((r) => r.resourceType == 'MedicationRequest');
+        final med = bundle.resources
+            .firstWhere((r) => r.resourceType == 'MedicationRequest');
         expect(med.data['intent'], equals('order'));
       });
 
       test('medication requests have dosage instructions', () async {
         final bundle = await getBundle();
-        final med = bundle.resources.firstWhere((r) => r.resourceType == 'MedicationRequest');
+        final med = bundle.resources
+            .firstWhere((r) => r.resourceType == 'MedicationRequest');
         expect(med.data['dosageInstruction'], isNotNull);
       });
     });
@@ -222,20 +243,24 @@ void main() {
     group('Appointments', () {
       test('bundle contains at least 3 appointments', () async {
         final bundle = await getBundle();
-        final appts = bundle.resources.where((r) => r.resourceType == 'Appointment').toList();
+        final appts = bundle.resources
+            .where((r) => r.resourceType == 'Appointment')
+            .toList();
         expect(appts.length, greaterThanOrEqualTo(3));
       });
 
       test('appointments have ISO-8601 start time', () async {
         final bundle = await getBundle();
-        final appt = bundle.resources.firstWhere((r) => r.resourceType == 'Appointment');
+        final appt =
+            bundle.resources.firstWhere((r) => r.resourceType == 'Appointment');
         final start = appt.data['start'] as String;
         expect(start, contains('T'));
       });
 
       test('appointments have participants', () async {
         final bundle = await getBundle();
-        final appt = bundle.resources.firstWhere((r) => r.resourceType == 'Appointment');
+        final appt =
+            bundle.resources.firstWhere((r) => r.resourceType == 'Appointment');
         final participants = appt.data['participant'] as List;
         expect(participants, isNotEmpty);
       });
@@ -268,13 +293,15 @@ void main() {
       test('all resources have non-empty ids', () async {
         final bundle = await getBundle();
         for (final resource in bundle.resources) {
-          expect(resource.id, isNotEmpty, reason: '${resource.resourceType} should have an id');
+          expect(resource.id, isNotEmpty,
+              reason: '${resource.resourceType} should have an id');
         }
       });
 
       test('condition references Patient subject', () async {
         final bundle = await getBundle();
-        final condition = bundle.resources.firstWhere((r) => r.resourceType == 'Condition');
+        final condition =
+            bundle.resources.firstWhere((r) => r.resourceType == 'Condition');
         expect(condition.data['subject'], isNotNull);
       });
     });

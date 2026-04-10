@@ -61,9 +61,7 @@ void main() {
       });
 
       test('downloadModel emits nothing on non-mobile', () async {
-        final events = await translationService
-            .downloadModel('en')
-            .toList();
+        final events = await translationService.downloadModel('en').toList();
         expect(events, isEmpty);
       });
 

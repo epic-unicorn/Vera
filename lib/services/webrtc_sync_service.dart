@@ -105,8 +105,8 @@ class WebRtcSyncService {
 
   /// Creates a new sync session and returns the [SyncSessionPayload] which is
   /// encoded into the QR code displayed to the user.
-  Future<({SyncSessionPayload? payload, Failure? failure})>
-      createSession(String serialisedMedicalData) async {
+  Future<({SyncSessionPayload? payload, Failure? failure})> createSession(
+      String serialisedMedicalData) async {
     try {
       final sessionId = _uuid.v4();
       final channelKey = _generateChannelKey();
@@ -115,8 +115,7 @@ class WebRtcSyncService {
 
       final payload = SyncSessionPayload(
         sessionId: sessionId,
-        signalingUrl:
-            '${AppConstants.signalingWsUrl}/$sessionId',
+        signalingUrl: '${AppConstants.signalingWsUrl}/$sessionId',
         channelKey: channelKey,
         expiresAt: expiresAt,
       );
@@ -192,8 +191,7 @@ class WebRtcSyncService {
 
   // ── Internal ──────────────────────────────────────────────────────────────
 
-  Future<void> _connectSignaling(String url,
-      {required String role}) async {
+  Future<void> _connectSignaling(String url, {required String role}) async {
     _signalingChannel = WebSocketChannel.connect(Uri.parse(url));
     _signalingChannel!.stream.listen(
       (message) => _handleSignalingMessage(message as String),
@@ -226,18 +224,16 @@ class WebRtcSyncService {
     _peerConnection!.onConnectionState = (state) {
       if (state == RTCPeerConnectionState.RTCPeerConnectionStateConnected) {
         _setState(WebRtcConnectionState.connected);
-      } else if (state ==
-          RTCPeerConnectionState.RTCPeerConnectionStateFailed) {
+      } else if (state == RTCPeerConnectionState.RTCPeerConnectionStateFailed) {
         _setState(WebRtcConnectionState.failed);
       }
     };
   }
 
-  Future<void> _createDataChannel(
-      String payload, String channelKey) async {
+  Future<void> _createDataChannel(String payload, String channelKey) async {
     final init = RTCDataChannelInit()..ordered = true;
-    _dataChannel = await _peerConnection!.createDataChannel(
-        'vera-medical', init);
+    _dataChannel =
+        await _peerConnection!.createDataChannel('vera-medical', init);
 
     _dataChannel!.onDataChannelState = (state) {
       if (state == RTCDataChannelState.RTCDataChannelOpen) {
@@ -270,8 +266,7 @@ class WebRtcSyncService {
 
     switch (type) {
       case 'offer':
-        final offer = RTCSessionDescription(
-            msg['sdp'] as String, 'offer');
+        final offer = RTCSessionDescription(msg['sdp'] as String, 'offer');
         await _peerConnection?.setRemoteDescription(offer);
         final answer = await _peerConnection!.createAnswer();
         await _peerConnection!.setLocalDescription(answer);
@@ -281,8 +276,7 @@ class WebRtcSyncService {
         }));
 
       case 'answer':
-        final answer = RTCSessionDescription(
-            msg['sdp'] as String, 'answer');
+        final answer = RTCSessionDescription(msg['sdp'] as String, 'answer');
         await _peerConnection?.setRemoteDescription(answer);
 
       case 'ice':
@@ -316,8 +310,7 @@ class WebRtcSyncService {
     // Verify MAC
     final keyBytes = base64Decode(keyBase64);
     final hmac = Hmac(sha256, keyBytes);
-    final expectedMac =
-        hmac.convert(payloadBytes).toString();
+    final expectedMac = hmac.convert(payloadBytes).toString();
     if (expectedMac != map['mac']) {
       throw const SyncConnectionFailure(
           'MAC verification failed. Data may be tampered.');

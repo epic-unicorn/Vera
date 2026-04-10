@@ -211,8 +211,7 @@ class MockDataService {
               {
                 'system': 'http://snomed.info/sct',
                 'code': '783541009',
-                'display':
-                    'Invasief ductaal carcinoom van mamma (bevinding)',
+                'display': 'Invasief ductaal carcinoom van mamma (bevinding)',
               }
             ],
             'text': 'HER2-positief invasief ductaal carcinoom mammae links',
@@ -256,8 +255,7 @@ class MockDataService {
           ],
           'note': [
             {
-              'text':
-                  'IKNL Richtlijn Borstkanker 2023 van toepassing. '
+              'text': 'IKNL Richtlijn Borstkanker 2023 van toepassing. '
                   'Tumorgrootte: 2,8 cm. Schildwachtklierprocedure uitgevoerd. '
                   'Geen lymfekliermetastasen vastgesteld.',
             }
@@ -277,8 +275,7 @@ class MockDataService {
             {
               'coding': [
                 {
-                  'system':
-                      'http://terminology.hl7.org/CodeSystem/v2-0074',
+                  'system': 'http://terminology.hl7.org/CodeSystem/v2-0074',
                   'code': 'PAT',
                   'display': 'Pathologie',
                 }
@@ -312,7 +309,7 @@ class MockDataService {
           ],
           'conclusion':
               'HER2-positief (IHC 3+), ER-negatief, PR-negatief, Ki-67 38%. '
-              'Invasief ductaal carcinoom graad III (Bloom-Richardson).',
+                  'Invasief ductaal carcinoom graad III (Bloom-Richardson).',
           'conclusionCode': [
             {
               'coding': [
@@ -526,7 +523,9 @@ class MockDataService {
               ],
               'text': 'Geen lymfekliermetastasen (pN0 SN)',
             },
-            'note': [{'text': 'IKNL aanbeveling: SLNB bij cN0 borstkanker.'}],
+            'note': [
+              {'text': 'IKNL aanbeveling: SLNB bij cN0 borstkanker.'}
+            ],
           },
         ),
         FhirResource(
@@ -558,8 +557,7 @@ class MockDataService {
             ],
             'note': [
               {
-                'text':
-                    'Vrije resectiemarges geconfirmeerd. R0-resectie. '
+                'text': 'Vrije resectiemarges geconfirmeerd. R0-resectie. '
                     'IKNL richtlijn: adjuvante radiotherapie geïndiceerd na BCS.'
               }
             ],
@@ -594,7 +592,7 @@ class MockDataService {
               {
                 'text':
                     'Hypofractionering 40 Gy / 15 fracties per FAST-Forward protocol. '
-                    'IKNL Richtlijn Borstkanker 2023 §6.3.'
+                        'IKNL Richtlijn Borstkanker 2023 §6.3.'
               }
             ],
           },
@@ -644,7 +642,7 @@ class MockDataService {
               {
                 'text':
                     'IKNL: Trastuzumab + pertuzumab gedurende 1 jaar bij HER2-positief '
-                    'stadium I-III. Echocardiografie q3m ter controle LVEF.',
+                        'stadium I-III. Echocardiografie q3m ter controle LVEF.',
               }
             ],
           },
@@ -695,7 +693,7 @@ class MockDataService {
               {
                 'text':
                     'Neoadjuvant schema TCHP (taxaan + carboplatine + HER2-blokkade). '
-                    'Afgerond na 6 cycli. pCR bereikt in axilla.',
+                        'Afgerond na 6 cycli. pCR bereikt in axilla.',
               }
             ],
           },
@@ -714,7 +712,7 @@ class MockDataService {
           'title': 'Oncologisch zorgplan – IKNL Richtlijn Borstkanker 2023',
           'description':
               'Persoonlijk zorgplan op basis van HER2-positief invasief ductaal '
-              'carcinoom stadium IIA. Gebaseerd op IKNL-richtlijn 2023.',
+                  'carcinoom stadium IIA. Gebaseerd op IKNL-richtlijn 2023.',
           'subject': {'reference': 'Patient/patient-001'},
           'period': {
             'start': '2024-12-01',
@@ -734,7 +732,7 @@ class MockDataService {
                 },
                 'description':
                     'IKNL: Neoadjuvante HER2-gerichte therapie aanbevolen bij '
-                    'cT2 HER2-positieve tumoren.',
+                        'cT2 HER2-positieve tumoren.',
               },
             },
             {
@@ -792,14 +790,13 @@ class MockDataService {
                 },
                 'description':
                     'IKNL: Jaarlijkse mammografie gedurende 5 jaar na behandeling. '
-                    'Echocardiografie LVEF q6m t/m einde trastuzumab.',
+                        'Echocardiografie LVEF q6m t/m einde trastuzumab.',
               },
             },
           ],
           'note': [
             {
-              'text':
-                  'Richtlijn: https://www.iknl.nl/richtlijnen/borstkanker. '
+              'text': 'Richtlijn: https://www.iknl.nl/richtlijnen/borstkanker. '
                   'MDO-besluit: 2024-12-12 Multidisciplinair Overleg UMC Utrecht.',
             }
           ],
@@ -859,7 +856,7 @@ class MockDataService {
             },
             'comment':
                 'Meenemen: bijwerkingendagboek, lijst met huidige medicatie, '
-                'vragen over LVEF-uitslag echocardiografie.',
+                    'vragen over LVEF-uitslag echocardiografie.',
           },
         ),
         FhirResource(

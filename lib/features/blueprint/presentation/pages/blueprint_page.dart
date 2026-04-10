@@ -12,9 +12,8 @@ import '../../domain/entities/timeline_event.dart';
 final _carePlanProvider = FutureProvider<List<TimelineEvent>>((ref) async {
   final service = ref.read(mockDataServiceProvider);
   final carePlan = await service.fetchCarePlan();
-  final activities =
-      (carePlan.data['activity'] as List<dynamic>? ?? [])
-          .cast<Map<String, dynamic>>();
+  final activities = (carePlan.data['activity'] as List<dynamic>? ?? [])
+      .cast<Map<String, dynamic>>();
   return TimelineEvent.fromCarePlanActivities(activities);
 });
 
@@ -79,8 +78,8 @@ class BlueprintPage extends ConsumerWidget {
           SliverFillRemaining(
             hasScrollBody: false,
             child: eventsAsync.when(
-              loading: () => const Center(
-                  child: CircularProgressIndicator.adaptive()),
+              loading: () =>
+                  const Center(child: CircularProgressIndicator.adaptive()),
               error: (e, _) => Center(
                 child: Padding(
                   padding: const EdgeInsets.all(20),
@@ -153,7 +152,8 @@ class _LegendItem extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: 12, height: 12,
+          width: 12,
+          height: 12,
           decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 6),

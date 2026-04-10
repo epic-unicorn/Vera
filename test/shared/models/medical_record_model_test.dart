@@ -96,7 +96,8 @@ void main() {
         expect(model.resourceType, equals('Observation'));
       });
 
-      test('dateRecorded is stored unencrypted (used for timeline ordering)', () {
+      test('dateRecorded is stored unencrypted (used for timeline ordering)',
+          () {
         final model = makeModel(dateRecorded: '2024-04-10');
         // Date is deliberately NOT encrypted to allow sorting
         expect(model.dateRecorded, equals('2024-04-10'));

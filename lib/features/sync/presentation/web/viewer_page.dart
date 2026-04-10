@@ -100,8 +100,7 @@ class _ViewerPageState extends ConsumerState<ViewerPage> {
             // ── Ephemeral data warning bar ──────────────────────────────────
             if (_showEphemeralWarning)
               _EphemeralWarningBar(
-                onDismiss: () =>
-                    setState(() => _showEphemeralWarning = false),
+                onDismiss: () => setState(() => _showEphemeralWarning = false),
               ),
 
             Expanded(child: _buildBody(theme)),
@@ -151,8 +150,7 @@ class _ViewerPageState extends ConsumerState<ViewerPage> {
           children: [
             const CircularProgressIndicator.adaptive(),
             const SizedBox(height: 16),
-            Text(StringsNl.syncConnecting,
-                style: theme.textTheme.bodyLarge),
+            Text(StringsNl.syncConnecting, style: theme.textTheme.bodyLarge),
           ],
         ),
       );
@@ -295,8 +293,7 @@ class _ReceivedDataView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.wifi,
-                      color: Color(0xFF1B7A3E), size: 20),
+                  const Icon(Icons.wifi, color: Color(0xFF1B7A3E), size: 20),
                   const SizedBox(width: 8),
                   Text(StringsNl.syncConnected,
                       style: theme.textTheme.titleMedium?.copyWith(
@@ -343,8 +340,8 @@ class _ReceivedDataView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text('RAM',
-                        style: theme.textTheme.labelSmall?.copyWith(
-                            color: const Color(0xFF1B5E20))),
+                        style: theme.textTheme.labelSmall
+                            ?.copyWith(color: const Color(0xFF1B5E20))),
                   ),
                 ),
               ).animate().fadeIn(

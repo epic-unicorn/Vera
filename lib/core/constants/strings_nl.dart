@@ -7,8 +7,7 @@ class StringsNl {
 
   // ── App ──────────────────────────────────────────────────────────────────
   static const String appName = 'Vera';
-  static const String appTagline =
-      'Jouw persoonlijke oncologie kompas';
+  static const String appTagline = 'Jouw persoonlijke oncologie kompas';
 
   // ── Privacy Sentinel ──────────────────────────────────────────────────────
   static const String sentinelLocalTitle = 'Gegevens lokaal beveiligd';

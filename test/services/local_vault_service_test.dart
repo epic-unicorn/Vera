@@ -33,8 +33,7 @@ void main() {
         );
       });
 
-      test(
-          'unlockWithBiometrics throws VaultNotSupportedFailure on non-mobile',
+      test('unlockWithBiometrics throws VaultNotSupportedFailure on non-mobile',
           () async {
         expect(
           () => vaultService.unlockWithBiometrics(),

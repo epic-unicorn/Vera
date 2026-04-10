@@ -163,7 +163,7 @@ class VeraTheme {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: _primaryGreen,
       brightness: Brightness.dark,
-      primary: const Color(0xFF81C784),       // lighter green for dark bg (5.1:1)
+      primary: const Color(0xFF81C784), // lighter green for dark bg (5.1:1)
       onPrimary: const Color(0xFF003311),
       primaryContainer: const Color(0xFF1B3A20),
       error: const Color(0xFFEF9A9A),
@@ -267,7 +267,8 @@ class VeraTheme {
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         labelStyle: tt.bodyMedium,
-        hintStyle: tt.bodyMedium?.copyWith(color: cs.onSurface.withOpacity(0.5)),
+        hintStyle:
+            tt.bodyMedium?.copyWith(color: cs.onSurface.withOpacity(0.5)),
       ),
 
       // ── Card ────────────────────────────────────────────────────────────────
@@ -300,8 +301,7 @@ class VeraTheme {
       // ── Snack bar ────────────────────────────────────────────────────────────
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         contentTextStyle: tt.bodyMedium?.copyWith(color: Colors.white),
       ),
     );

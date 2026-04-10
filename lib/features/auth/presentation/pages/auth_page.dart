@@ -45,7 +45,8 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     final vaultService = ref.read(localVaultServiceProvider);
     final initialised = await vaultService.isVaultInitialised();
     if (mounted) {
-      setState(() => _step = initialised ? _AuthStep.unlock : _AuthStep.newVault);
+      setState(
+          () => _step = initialised ? _AuthStep.unlock : _AuthStep.newVault);
     }
     if (initialised) {
       // Auto-attempt biometric unlock on arrival
@@ -171,18 +172,16 @@ class _NewVaultView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.lock_outline,
-                size: 80, color: theme.colorScheme.primary)
+        Icon(Icons.lock_outline, size: 80, color: theme.colorScheme.primary)
             .animate()
-            .scaleXY(begin: 0.6, end: 1, duration: 600.ms, curve: Curves.easeOut),
+            .scaleXY(
+                begin: 0.6, end: 1, duration: 600.ms, curve: Curves.easeOut),
         const SizedBox(height: 32),
         Text(StringsNl.authCreateVaultTitle,
-            style: theme.textTheme.headlineMedium,
-            textAlign: TextAlign.center),
+            style: theme.textTheme.headlineMedium, textAlign: TextAlign.center),
         const SizedBox(height: 16),
         Text(StringsNl.authCreateVaultBody,
-            style: theme.textTheme.bodyLarge,
-            textAlign: TextAlign.center),
+            style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
         const SizedBox(height: 40),
         ElevatedButton.icon(
           onPressed: isBusy ? null : onCreateVault,
@@ -231,14 +230,12 @@ class _UnlockView extends StatelessWidget {
             .scaleXY(end: 1.1, duration: 700.ms, curve: Curves.easeInOut),
         const SizedBox(height: 32),
         Text(StringsNl.authTitle,
-            style: theme.textTheme.headlineMedium,
-            textAlign: TextAlign.center),
+            style: theme.textTheme.headlineMedium, textAlign: TextAlign.center),
         const SizedBox(height: 12),
         Text(StringsNl.authBiometricPrompt,
-            style: theme.textTheme.bodyLarge?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.7)),
+            style: theme.textTheme.bodyLarge
+                ?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.7)),
             textAlign: TextAlign.center),
-
         if (errorMessage != null) ...[
           const SizedBox(height: 20),
           Container(
@@ -276,22 +273,20 @@ class _UnlockView extends StatelessWidget {
             ),
           ),
         ],
-
         const SizedBox(height: 40),
-
         ElevatedButton.icon(
           onPressed: isBusy || attemptsLeft <= 0 ? null : onBiometricUnlock,
           icon: isBusy
               ? const SizedBox(
                   width: 20,
                   height: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2,
-                      color: Colors.white))
+                  child: CircularProgressIndicator(
+                      strokeWidth: 2, color: Colors.white))
               : const Icon(Icons.fingerprint),
           label: Text(isBusy ? StringsNl.loading : StringsNl.authUnlockButton),
         ),
-
-        if (attemptsLeft > 0 && attemptsLeft < AppConstants.maxFailedAuthAttempts)
+        if (attemptsLeft > 0 &&
+            attemptsLeft < AppConstants.maxFailedAuthAttempts)
           Padding(
             padding: const EdgeInsets.only(top: 12),
             child: Text(

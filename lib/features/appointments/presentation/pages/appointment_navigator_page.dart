@@ -50,8 +50,7 @@ class _AppointmentState {
 // ── Notifier ──────────────────────────────────────────────────────────────────
 
 class _AppointmentNotifier extends StateNotifier<_AppointmentState> {
-  _AppointmentNotifier(this._mockService)
-      : super(const _AppointmentState()) {
+  _AppointmentNotifier(this._mockService) : super(const _AppointmentState()) {
     _loadAppointments();
   }
 
@@ -196,8 +195,8 @@ class AppointmentNavigatorPage extends ConsumerWidget {
                         const SizedBox(height: 6),
                         Text(StringsNl.appointmentsSubtitle,
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.onSurface
-                                  .withOpacity(0.65),
+                              color:
+                                  theme.colorScheme.onSurface.withOpacity(0.65),
                             )),
                       ],
                     ),
@@ -211,8 +210,7 @@ class AppointmentNavigatorPage extends ConsumerWidget {
                     itemCount: state.appointments.length,
                     itemBuilder: (context, index) {
                       final appt = state.appointments[index];
-                      final isSelected =
-                          state.selectedAppointmentId == appt.id;
+                      final isSelected = state.selectedAppointmentId == appt.id;
                       return _AppointmentCard(
                         appointment: appt,
                         isSelected: isSelected,
@@ -242,8 +240,7 @@ class AppointmentNavigatorPage extends ConsumerWidget {
                   SliverToBoxAdapter(
                     child: _PocketGuidePanel(
                       markdown: state.pocketGuide!,
-                      onReadAloud: () =>
-                          notifier.readAloud(state.pocketGuide!),
+                      onReadAloud: () => notifier.readAloud(state.pocketGuide!),
                     ),
                   ),
 
@@ -274,14 +271,13 @@ class _AppointmentCard extends StatelessWidget {
     final data = appointment.data;
     final theme = Theme.of(context);
     final serviceType =
-        ((data['serviceType'] as List?)?.firstOrNull as Map?)?['text'] ?? 'Afspraak';
+        ((data['serviceType'] as List?)?.firstOrNull as Map?)?['text'] ??
+            'Afspraak';
     final start = data['start'] as String?;
-    final location =
-        (data['location'] as Map?)?['display'] ?? '';
-    final practitioner =
-        ((data['participant'] as List?)?.firstOrNull as Map?)?['actor']
-                ?['display'] ??
-            '';
+    final location = (data['location'] as Map?)?['display'] ?? '';
+    final practitioner = ((data['participant'] as List?)?.firstOrNull
+            as Map?)?['actor']?['display'] ??
+        '';
 
     String dateStr = '';
     String timeStr = '';
@@ -313,8 +309,7 @@ class _AppointmentCard extends StatelessWidget {
                       size: 20, color: theme.colorScheme.primary),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: Text(serviceType,
-                        style: theme.textTheme.titleSmall),
+                    child: Text(serviceType, style: theme.textTheme.titleSmall),
                   ),
                 ],
               ),
@@ -383,8 +378,7 @@ class _SymptomLogger extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Divider(),
-          Text('Symptomen registreren',
-              style: theme.textTheme.titleMedium),
+          Text('Symptomen registreren', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           if (PlatformDetector.isSpeechSupported) ...[
             ElevatedButton.icon(
@@ -394,8 +388,7 @@ class _SymptomLogger extends StatelessWidget {
                   ? StringsNl.appointmentsVoiceStop
                   : StringsNl.appointmentsVoiceLog),
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    isListening ? const Color(0xFFC62828) : null,
+                backgroundColor: isListening ? const Color(0xFFC62828) : null,
                 minimumSize: const Size(double.infinity, 52),
               ),
             ),
@@ -484,8 +477,7 @@ class _PocketGuidePanel extends StatelessWidget {
             children: [
               const Icon(Icons.menu_book_outlined, size: 20),
               const SizedBox(width: 8),
-              Text('Uw Pocket Gids',
-                  style: theme.textTheme.titleMedium),
+              Text('Uw Pocket Gids', style: theme.textTheme.titleMedium),
               const Spacer(),
               Semantics(
                 button: true,
