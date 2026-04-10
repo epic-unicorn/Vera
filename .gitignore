@@ -1,0 +1,148 @@
+# ────────────────────────────────────────────────────────────────────────────────
+# Flutter & Dart
+# ────────────────────────────────────────────────────────────────────────────────
+
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+pubspec.lock
+analysis_options.dart.json
+
+# Generated files from build_runner
+*.g.dart
+*.config.dart
+*.freezed.dart
+
+# Isar generated files
+*.isar*
+
+# Local state for build_runner
+build/
+
+# ────────────────────────────────────────────────────────────────────────────────
+# IDE & Editor Configuration
+# ────────────────────────────────────────────────────────────────────────────────
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+*.swp
+*.swo
+
+# Xcode
+ios/.xcode.env
+ios/.xcode.env.append
+xcuserdata/
+.DS_Store
+.AppleDouble
+.LSOverride
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.xcworkspace/xcuserdata/
+
+# macOS
+.DS_Store
+_build_webrtc_output/
+
+# Linux/Windows
+windows/flutter/local_notifcations_plugin_c_library.a
+windows/flutter/flutter_windows.dll
+
+# ────────────────────────────────────────────────────────────────────────────────
+# Platform-Specific Build Outputs
+# ────────────────────────────────────────────────────────────────────────────────
+
+# Android
+android/.gradle/
+android/.gradle
+android/local.properties
+android/**/GeneratedPluginRegistrant.java
+android/**/gradle-wrapper.jar
+android/**/gradlew
+android/**/gradlew.bat
+android/key.properties
+android/key.jks
+
+# iOS
+ios/Flutter/Flutter.podspec
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.xcframework
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/EmbeddingMetalFeatures.txt
+ios/Podfile.lock
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.podspec.backup
+ios/Flutter/Flutter.framework.backup
+
+# macOS
+macos/Flutter/Flutter.podspec
+macos/Flutter/Flutter.xcframework
+macos/Flutter/flutter_export_environment.sh
+macos/Podfile.lock
+macos/Pods/
+macos/.symlinks/
+
+# Web
+web/flutter_service_worker.js
+
+# Windows
+windows/flutter/generated_plugins.cmake
+windows/flutter/generated_plugin_cpp_api_header.h
+
+# Linux
+linux/flutter/generated_plugins.cmake
+linux/flutter/generated_plugin_cpp_api_header.h
+
+# ────────────────────────────────────────────────────────────────────────────────
+# Private & Sensitive Files
+# ────────────────────────────────────────────────────────────────────────────────
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Firebase/Google services config (if added later)
+google-services.json
+GoogleService-Info.plist
+
+# API keys and secrets
+.secret
+*.key
+*.pem
+
+# ────────────────────────────────────────────────────────────────────────────────
+# Temporary & Cache Files
+# ────────────────────────────────────────────────────────────────────────────────
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.AppleDouble
+.LSOverride
+Thumbs.db
+.swp
+.swo
+*~
+
+# Miscellaneous
+*.bak
+*.backup
+*.log
+*.orig
+.dart_tool/
+.idea/

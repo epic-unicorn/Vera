@@ -1,0 +1,92 @@
+name: vera
+description: >
+  Vera – Jouw persoonlijke oncologie kompas.
+  Zero-Knowledge architectuur voor privacybehoud medische navigatie.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.19.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # ── State Management ────────────────────────────────────────────────────────
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # ── Routing ──────────────────────────────────────────────────────────────────
+  go_router: ^17.2.0
+
+  # ── Local Encrypted Storage (mobile only) ────────────────────────────────────
+  # Isar is not supported on Web; platform-guarded in LocalVaultService.
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1   # bundles native Isar binary per platform
+  path_provider: ^2.1.3
+
+  # ── Cryptography ─────────────────────────────────────────────────────────────
+  flutter_secure_storage: ^10.0.0  # Keychain / Android Keystore key custody
+  encrypt: ^5.0.3                 # AES-256-GCM authenticated encryption
+  pointycastle: ^3.9.1            # low-level crypto primitives
+  crypto: ^3.0.3                  # SHA-256 / HMAC helpers
+
+  # ── Biometric / Passkey Authentication ───────────────────────────────────────
+  local_auth: ^3.0.1              # Fingerprint, FaceID, OS pin fallback
+
+  # ── On-Device ML (NER PII-shield + Translation) ──────────────────────────────
+  # Both packages use Google ML Kit on-device models – ZERO data leaves device.
+  google_mlkit_entity_extraction: ^0.15.3   # Named-Entity Recognition
+  google_mlkit_translation: ^0.13.1          # On-device language translation
+
+  # ── WebRTC P2P Sync (Mobile → Web Viewer) ────────────────────────────────────
+  # Only WebRTC session metadata (SDP/ICE) passes through the relay.
+  # All medical payload is encrypted inside the P2P data-channel.
+  flutter_webrtc: ^1.4.1
+  web_socket_channel: ^3.0.3    # lightweight signalling channel
+
+  # ── QR Code ──────────────────────────────────────────────────────────────────
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^7.2.0
+
+  # ── Voice & Accessibility ────────────────────────────────────────────────────
+  speech_to_text: ^7.3.0        # Symptom voice logging
+  flutter_tts: ^4.2.5           # Screen-reader / read-aloud support
+
+  # ── UI & Utilities ───────────────────────────────────────────────────────────
+  flutter_animate: ^4.5.0
+  intl: ^0.20.2
+  universal_platform: ^1.1.0
+  uuid: ^4.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.9
+  riverpod_generator: ^2.4.0
+  isar_generator: ^3.1.0+1
+
+flutter:
+  uses-material-design: true
+  generate: true               # enables intl ARB generation
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    # Atkinson Hyperlegible – purpose-designed for low-vision readability
+    - family: AtkinsonHyperlegible
+      fonts:
+        - asset: assets/fonts/Atkinson-Hyperlegible-Regular-102.otf
+        - asset: assets/fonts/Atkinson-Hyperlegible-Bold-102.otf
+          weight: 700
+        - asset: assets/fonts/Atkinson-Hyperlegible-Italic-102.otf
+          style: italic
+        - asset: assets/fonts/Atkinson-Hyperlegible-BoldItalic-102.otf
+          weight: 700
+          style: italic
