@@ -178,7 +178,6 @@ Vera is a living system that stays in sync with your actual care via standardize
 
 3.  **Layer 3: Trusted Source Integration**
     *   Queries [Richtlijnendatabase](https://richtlijnendatabase.nl) and [Cancer Atlas](https://iknl.nl).
----
 
 ## **7. Getting Started – Development**
 
