@@ -186,6 +186,17 @@ class _CompactDot extends StatelessWidget {
       button: false,
       child: Tooltip(
         message: '${config.title}\n${config.subtitle}',
+        triggerMode: TooltipTriggerMode.tap,
+        waitDuration: Duration.zero,
+        showDuration: const Duration(seconds: 5),
+        preferBelow: false,
+        decoration: BoxDecoration(
+          color: Colors.black87,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Colors.white,
+            ),
         child: SizedBox(
           width: AppConstants.minTouchTarget,
           height: AppConstants.minTouchTarget,

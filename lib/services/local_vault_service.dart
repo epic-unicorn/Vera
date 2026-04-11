@@ -11,6 +11,7 @@ import 'package:pointycastle/export.dart' as pc;
 import 'package:uuid/uuid.dart';
 
 import '../core/constants/app_constants.dart';
+import '../core/constants/strings_nl.dart';
 import '../core/error/failures.dart';
 import '../core/platform/platform_detector.dart';
 import '../features/vault/data/models/medical_record_model.dart';
@@ -106,17 +107,20 @@ class LocalVaultService {
     }
 
     try {
-      final canCheck = await _localAuth.canCheckBiometrics;
-      if (!canCheck) {
+      // canCheckBiometrics is true only when biometrics are enrolled;
+      // isDeviceSupported also covers PIN/pattern fallback (biometricOnly: false).
+      final isSupported = await _localAuth.canCheckBiometrics ||
+          await _localAuth.isDeviceSupported();
+      if (!isSupported) {
         return (
           success: false,
           failure: const AuthBiometricFailure(
-              'Biometrie niet beschikbaar op dit apparaat.'),
+              'Geen schermbeveiliging op dit apparaat. Stel een PIN of biometrie in via de apparaatinstellingen.'),
         );
       }
 
       final authenticated = await _localAuth.authenticate(
-        localizedReason: AppConstants.vaultKeyStorageKey,
+        localizedReason: StringsNl.authBiometricPrompt,
         biometricOnly: false, // allow PIN fallback
         persistAcrossBackgrounding: true,
       );

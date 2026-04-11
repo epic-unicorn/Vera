@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import '../../../../shared/theme/vera_theme.dart';
 import '../../domain/entities/timeline_event.dart';
+import '../../../decoder/domain/models/jargon_entry.dart';
 
 /// Horizontal, interactive timeline mapping the patient's oncology journey.
 /// Each node is a tappable card that expands on press to show details and
@@ -60,9 +61,16 @@ class _TimelineWidgetState extends State<TimelineWidget> {
         ),
 
         // ── Detail panel ─────────────────────────────────────────────────────
+        // Make the detail panel fill remaining vertical space and scroll
+        // internally to avoid RenderFlex overflow when content is large.
         if (_expandedId != null)
-          _EventDetailPanel(
-            event: widget.events.firstWhere((e) => e.id == _expandedId),
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: _EventDetailPanel(
+                event: widget.events.firstWhere((e) => e.id == _expandedId),
+              ),
+            ),
           ),
       ],
     );
@@ -190,6 +198,19 @@ class _EventDetailPanel extends StatelessWidget {
     final theme = Theme.of(context);
     final dateFormatted = _formatDate(event.dateIso);
 
+    // Zoek medische termen in titel en beschrijving en toon apart blok met uitleg
+    final hayText = '${event.title} ${event.description}';
+    final matches = builtInGlossary.where((entry) {
+      final hay = hayText.toLowerCase();
+      final needle = entry.term.toLowerCase();
+      return hay.contains(needle);
+    }).toList();
+
+    // We show a separate 'Begrijpelijke uitleg' block instead of inlining
+    // explanations into the description/action items to avoid duplicate text.
+    final String displayedDescription = event.description;
+    final List<String> displayedActionItems = List<String>.from(event.actionItems);
+
     return AnimatedSize(
       duration: 300.ms,
       curve: Curves.easeInOut,
@@ -223,7 +244,39 @@ class _EventDetailPanel extends StatelessWidget {
                 ],
                 const Divider(height: 24),
                 // Description
-                Text(event.description, style: theme.textTheme.bodyMedium),
+                Text(displayedDescription, style: theme.textTheme.bodyMedium),
+
+                // Begrijpelijke uitleg (apart blok)
+                if (matches.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  Text('Begrijpelijke uitleg',
+                      style: theme.textTheme.titleSmall),
+                  const SizedBox(height: 8),
+                  ...matches.map((m) => Card(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        color: theme.colorScheme.surfaceVariant,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(m.term,
+                                  style: theme.textTheme.titleSmall
+                                      ?.copyWith(fontWeight: FontWeight.w700)),
+                              const SizedBox(height: 6),
+                              Text(m.dutchExplanation,
+                                  style: theme.textTheme.bodySmall),
+                              if (m.actionItem.isNotEmpty) ...[
+                                const SizedBox(height: 8),
+                                Text('Actie: ${m.actionItem}',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                        fontStyle: FontStyle.italic)),
+                              ],
+                            ],
+                          ),
+                        ),
+                      )),
+                ],
 
                 // IKNL guideline link
                 if (event.iknlGuidelineRef != null) ...[
@@ -240,11 +293,11 @@ class _EventDetailPanel extends StatelessWidget {
                 ],
 
                 // Action items
-                if (event.actionItems.isNotEmpty) ...[
+                if (displayedActionItems.isNotEmpty) ...[
                   const SizedBox(height: 12),
                   Text('Actiepunten:', style: theme.textTheme.titleSmall),
                   const SizedBox(height: 6),
-                  ...event.actionItems.map(
+                  ...displayedActionItems.map(
                     (item) => Padding(
                       padding: const EdgeInsets.only(bottom: 4),
                       child: Row(

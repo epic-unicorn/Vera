@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/router/app_router.dart';
+import 'services/debug_logger.dart';
 import 'shared/theme/vera_theme.dart';
 
 /// Root application widget.
@@ -16,39 +17,46 @@ class VeraApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.watch(appRouterProvider);
+    try {
+      DebugLogger().log('Building VeraApp widget');
+      final router = ref.watch(appRouterProvider);
+      DebugLogger().log('✓ Router initialized');
 
-    return MaterialApp.router(
-      title: 'Vera',
-      debugShowCheckedModeBanner: false,
+      return MaterialApp.router(
+        title: 'Vera',
+        debugShowCheckedModeBanner: false,
 
-      // ── Dutch primary locale ─────────────────────────────────────────────
-      locale: const Locale('nl', 'NL'),
-      supportedLocales: const [
-        Locale('nl', 'NL'), // Default: Dutch
-        Locale('en', 'US'),
-        Locale('de', 'DE'),
-        Locale('fr', 'FR'),
-        Locale('ar'),
-        Locale('tr'),
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+        // ── Dutch primary locale ─────────────────────────────────────────────
+        locale: const Locale('nl', 'NL'),
+        supportedLocales: const [
+          Locale('nl', 'NL'), // Default: Dutch
+          Locale('en', 'US'),
+          Locale('de', 'DE'),
+          Locale('fr', 'FR'),
+          Locale('ar'),
+          Locale('tr'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
 
-      // ── WCAG-compliant themes ────────────────────────────────────────────
-      theme: VeraTheme.lightTheme,
-      darkTheme: VeraTheme.darkTheme,
-      themeMode: ThemeMode.system,
+        // ── WCAG-compliant themes ────────────────────────────────────────────
+        theme: VeraTheme.lightTheme,
+        darkTheme: VeraTheme.darkTheme,
+        themeMode: ThemeMode.system,
 
-      // ── Accessibility ─────────────────────────────────────────────────────
-      // Flutter respects the OS text-scale factor automatically.
-      // No textScaleFactor cap is applied; see EAA / WCAG 1.4.4 requirement.
+        // ── Accessibility ─────────────────────────────────────────────────────
+        // Flutter respects the OS text-scale factor automatically.
+        // No textScaleFactor cap is applied; see EAA / WCAG 1.4.4 requirement.
 
-      // ── Router ───────────────────────────────────────────────────────────
-      routerConfig: router,
-    );
+        // ── Router ───────────────────────────────────────────────────────────
+        routerConfig: router,
+      );
+    } catch (e, st) {
+      DebugLogger().error('Error building VeraApp', st);
+      rethrow;
+    }
   }
 }

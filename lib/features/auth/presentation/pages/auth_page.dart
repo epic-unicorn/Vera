@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,6 +43,16 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   }
 
   Future<void> _initCheck() async {
+    // Skip auth gate in debug mode – navigate directly to blueprint.
+    if (kDebugMode) {
+      if (mounted) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) context.go(AppRoute.blueprint);
+        });
+      }
+      return;
+    }
+
     final vaultService = ref.read(localVaultServiceProvider);
     final initialised = await vaultService.isVaultInitialised();
     if (mounted) {

@@ -44,13 +44,8 @@ class AppShell extends ConsumerWidget {
           PrivacySentinel(compact: true),
           SizedBox(width: 8),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(72),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-            child: const PrivacySentinel(),
-          ),
-        ),
+        // Full sentinel pill removed to save vertical space; tooltip is
+        // now available on the compact sentinel icon in the app bar.
       ),
 
       body: child,
