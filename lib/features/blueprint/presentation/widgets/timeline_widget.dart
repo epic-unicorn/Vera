@@ -209,7 +209,8 @@ class _EventDetailPanel extends StatelessWidget {
     // We show a separate 'Begrijpelijke uitleg' block instead of inlining
     // explanations into the description/action items to avoid duplicate text.
     final String displayedDescription = event.description;
-    final List<String> displayedActionItems = List<String>.from(event.actionItems);
+    final List<String> displayedActionItems =
+        List<String>.from(event.actionItems);
 
     return AnimatedSize(
       duration: 300.ms,
