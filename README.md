@@ -14,8 +14,11 @@ Patients are currently caught between complex clinical data (Guidelines, Scienti
 
 ## **2. Core Features**
 *   **The Blueprint:** A visual, interactive timeline mapping the patient's specific diagnosis against national guidelines.
+
 *   **Plain-Language Decoder:** Local NLP translates technical pathology and guideline jargon into understandable "Action Items."
+
 *   **Regional Care-Mapping:** Uses the *Cancer Atlas* to highlight local expertise and support specific to the patient's area.
+
 *   **Proactive "Next-Step" Prep:** Generates personalized questions for the doctor based on upcoming milestones in the *Richtlijnendatabase*.
 
 ## **3. Security & Radical Privacy**
